@@ -7,14 +7,19 @@ import {
   FlatList,
 } from "react-native";
 
-
 import styles from "./popularjobs.style";
 import { COLORS, SIZES } from "../../../constants";
 import PopularJobCard from "../../common/cards/popular/PopularJobCard";
+import { useFetch } from "../../../hook/useFetch";
 
 const Popularjobs = () => {
-  const isLoading = false;
-  const error = false;
+
+  const {data, isLoading, error } = useFetch("search", {
+    query: "React developer",
+    num_pages: 1,
+  });
+
+  console.log(data)
 
   return (
     <View className={styles.container}>
@@ -31,11 +36,11 @@ const Popularjobs = () => {
           <Text>Somting went wrong</Text>
         ) : (
           <FlatList
-            data={[1, 2, 3, 4, 5]}
-            renderItem={({ item }) => <PopularJobCard />}
-            keyExtractor={item => item}
+            data={data}
+            renderItem={({ item }) => <PopularJobCard item={item}/>}
+            keyExtractor={(item) => item}
             horizontal
-            contentContainerStyle={{columnGap: SIZES.medium}}
+            contentContainerStyle={{ columnGap: SIZES.medium }}
           />
         )}
       </View>
