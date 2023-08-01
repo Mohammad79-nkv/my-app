@@ -9,8 +9,9 @@ import {
   Welcome,
 } from "../components";
 
-export default function Page() {
+export default function Page(props) {
   const router = useRouter();
+  
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
       <Stack.Screen

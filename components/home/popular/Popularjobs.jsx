@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -13,7 +13,7 @@ import PopularJobCard from "../../common/cards/popular/PopularJobCard";
 import { useFetch } from "../../../hook/useFetch";
 import { useRouter } from "expo-router";
 
-const Popularjobs = () => {
+const  Popularjobs = () => {
   const { data, isLoading, error } = useFetch("search", {
     query: "React developer",
     num_pages: 1,
@@ -26,6 +26,8 @@ const Popularjobs = () => {
   const handleRoute = (id) => {
     router.push(`/job-details/${id}`);
   };
+
+ 
 
   return (
     <View className={styles.container}>
@@ -46,7 +48,7 @@ const Popularjobs = () => {
             renderItem={({ item }) => (
               <PopularJobCard
                 item={item}
-                handlePress={() => handleRoute(item.id)}
+                handlePress={() => handleRoute(item.job_id)}
               />
             )}
             keyExtractor={(item) => item}
